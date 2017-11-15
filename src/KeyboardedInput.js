@@ -7,6 +7,7 @@ class KeyboardedInput extends React.Component {
   static propTypes = {
     name: PropTypes.any,
     className: PropTypes.any,
+    autoFocus: PropTypes.any,
     placeholder: PropTypes.any,
     value: PropTypes.any.isRequired,
     type: PropTypes.any,
@@ -54,7 +55,7 @@ class KeyboardedInput extends React.Component {
     const that = this;
     // Prevent blinking of the keyboard if opaque
     setTimeout(() => {
-      if (typeof(that.props.value) !== 'undefined') {
+      if (typeof (that.props.value) !== 'undefined') {
         that.input.focus();
         that.input.select();
         that.input.setSelectionRange(that.props.value.length, that.props.value.length);
@@ -82,6 +83,7 @@ class KeyboardedInput extends React.Component {
         <input
           name={this.props.name}
           className={this.props.className}
+          autoFocus={this.props.autoFocus ? this.props.autoFocus : false}
           placeholder={this.props.placeholder}
           value={this.props.value}
           type={this.props.type}
@@ -96,16 +98,16 @@ class KeyboardedInput extends React.Component {
           ref={(e) => { this.input = e; }}
         />
         {this.state.showKeyboard && this.props.enabled && this.props.readOnly !== true &&
-        <Keyboard
-          hideKeyboard={this.hideKeyboard}
-          defaultKeyboard={this.props.defaultKeyboard}
-          secondaryKeyboard={this.props.secondaryKeyboard}
-          inputNode={this.input}
-          dataset={this.props.dataset}
-          opacity={this.props.opacity}
-          isDraggable={this.props.isDraggable}
-          isFirstLetterUppercase={this.props.isFirstLetterUppercase}
-        />
+          <Keyboard
+            hideKeyboard={this.hideKeyboard}
+            defaultKeyboard={this.props.defaultKeyboard}
+            secondaryKeyboard={this.props.secondaryKeyboard}
+            inputNode={this.input}
+            dataset={this.props.dataset}
+            opacity={this.props.opacity}
+            isDraggable={this.props.isDraggable}
+            isFirstLetterUppercase={this.props.isFirstLetterUppercase}
+          />
         }
       </div>
     );
