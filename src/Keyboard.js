@@ -8,6 +8,7 @@ import LatinLayout from './layouts/LatinLayout';
 import CyrillicLayout from './layouts/CyrillicLayout';
 import SymbolsLayout from './layouts/SymbolsLayout';
 import GermanLayout from './layouts/GermanLayout';
+import PolishLayout from './layouts/PolishLayout'
 
 import BackspaceIcon from './icons/BackspaceIcon';
 import LanguageIcon from './icons/LanguageIcon';
@@ -62,6 +63,8 @@ export default class Keyboard extends PureComponent {
       keysSet = GermanLayout;
     } else if (this.state.currentLanguage === 'ru') {
       keysSet = CyrillicLayout;
+    } else if (this.state.currentLanguage === 'pl') {
+      keysSet = PolishLayout;
     } else if (this.state.currentLanguage) {
       keysSet = this.state.currentLanguage;
     } else {
@@ -77,7 +80,7 @@ export default class Keyboard extends PureComponent {
     let symbolsKeyValue;
     if (!this.state.showSymbols) {
       symbolsKeyValue = '.?!&';
-    } else if (this.state.currentLanguage === 'us' || this.state.currentLanguage === 'de') {
+    } else if (this.state.currentLanguage === 'us' || this.state.currentLanguage === 'de' || this.state.currentLanguage === 'pl') {
       symbolsKeyValue = 'Abc';
     } else if (this.state.currentLanguage === 'ru') {
       symbolsKeyValue = 'Абв';
@@ -88,8 +91,10 @@ export default class Keyboard extends PureComponent {
   }
 
   handleLanguageClick() {
-    this.setState({ currentLanguage: this.state.currentLanguage === this.props.defaultKeyboard
-      ? this.props.secondaryKeyboard : this.props.defaultKeyboard });
+    this.setState({
+      currentLanguage: this.state.currentLanguage === this.props.defaultKeyboard
+        ? this.props.secondaryKeyboard : this.props.defaultKeyboard
+    });
   }
 
   clearInput() {
